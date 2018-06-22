@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 03:46:58 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/22 11:58:46 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 14:35:28 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		ft_step_three(t_thread *p)
 		}
 		if (p->p->map.map[p->mapx][p->mapy] > 0)
 			p->hit = 1;
-		if (p->x == WIN_X / 2)
+		if (p->x == WIN_X / 2 && p->p->ennemi == 0)
 			ft_get_ennemie(p);
 	}
 	if (p->side == 0)

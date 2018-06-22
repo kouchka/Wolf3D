@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 17:22:08 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/22 12:11:34 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 14:53:21 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define SHOT_S "Musique/denis.wav"
 # define SHOT_HIT "Musique/fusil_sound_hit.wav"
 # define SHOT_RECH "Musique/recharge_fusil.wav"
+# define DEAD_CHAMP "Musique/dead_champ.wav"
 
 # define INTRO "Pics/Intro/wolf_me.xpm"
 

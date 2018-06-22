@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 15:15:27 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/22 08:16:00 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 15:38:16 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void				ft_init_plus_music(t_wolf3d *p)
 	p->event.sound[0] = Mix_LoadWAV(SHOT_S);
 	p->event.sound[1] = Mix_LoadWAV(SHOT_HIT);
 	p->event.sound[2] = Mix_LoadWAV(SHOT_RECH);
+	p->event.sound[3] = Mix_LoadWAV(DEAD_CHAMP);
+	Mix_Volume(0, MIX_MAX_VOLUME / 2);
 	p->event.transp = TRANSP;
 	p->event.intro = 0;
 	p->event.shot = 0;

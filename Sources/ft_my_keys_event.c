@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 15:24:56 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/22 12:03:33 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 15:04:28 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void		ft_threat_shot(t_wolf3d *p)
 			p->map.map[p->x][p->y] = 0;
 	}
 	else if (p->event.bullet > 0)
+	{
+		Mix_PlayChannel(1, p->event.sound[3], 0);
 		p->sprite.pos[p->x].hp = 0;
+	}
 	if (p->event.bullet > 0)
 	{
 		Mix_PlayChannel(0, p->event.sound[1], 0);

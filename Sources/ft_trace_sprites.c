@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 10:58:30 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/22 13:37:10 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 14:11:44 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,14 @@ void			ft_trace_sprites(t_thread *p, int size, int start)
 	i = 0;
 	while (i < size)
 	{
-		if (p->sprite->pos[spriteorder[i]].dead == 0)
+		if (p->sprite->pos[spriteorder[i]].dead / SPRITE_DEATH_TIME != SPRITE_DEAD)
 		{
 			frame = p->sprite->anim;
 			if (p->sprite->pos[spriteorder[i]].hp == 0)
-				frame += SPRITE_ALIVE;
+			{
+				frame = SPRITE_ALIVE + (p->sprite->pos[spriteorder[i]].dead / SPRITE_DEATH_TIME);
+				p->sprite->pos[spriteorder[i]].dead++;
+			}
 			if (frame == SPRITE - 1)
 				p->sprite->pos[spriteorder[i]].dead = 1;
 		}
