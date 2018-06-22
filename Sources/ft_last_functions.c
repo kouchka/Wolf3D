@@ -6,11 +6,43 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 03:24:39 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/15 05:11:26 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 13:18:53 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void		ft_get_ennemie(t_thread *p)
+{
+	int i;
+
+	i = 0;
+	while (i < p->sprite->nbr)
+	{
+		if ((int)p->sprite->pos[i].x == (int)p->mapy && (int)p->sprite->pos[i].y == (int)p->mapx && p->sprite->pos[i].hp != 0)
+		{
+			p->p->ennemi = 1;
+			p->p->x = i;
+			return ;
+		}
+		i++;
+	}
+}
+
+void		ft_swap_sprites(t_wolf3d *p)
+{
+	if (p->sprite.way == 0 && p->sprite.anim < SPRITE_ALIVE)
+		p->sprite.anim++;
+	else if (p->sprite.way == -1 && p->sprite.anim > 0)
+		p->sprite.anim--;
+	if (p->sprite.anim == SPRITE_ALIVE)
+	{
+		p->sprite.way = -1;
+		p->sprite.anim--;
+	}
+	else if (p->sprite.anim == 0)
+		p->sprite.way = 0;
+}
 
 void		ft_put_pixel(t_wolf3d *p, int x, int color)
 {

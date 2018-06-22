@@ -6,31 +6,26 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 09:05:09 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 11:24:53 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 08:15:22 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static void		ft_print_weapon(t_wolf3d *p)
+static void		ft_print_viewfinder(t_wolf3d *p)
 {
-	int				i;
-	int				j;
-	unsigned char	*c;
+	int i;
+	int j;
 
-	i = 0;
-	while (i < p->shot[0].hei - 1)
+	i = (WIN_Y / 2) - 5;
+	j = -5;
+	while (i < (WIN_Y / 2) + 6)
 	{
-		j = 0;
-		while (j < p->shot[0].wid - 1)
-		{
-			c = &p->shot[0].data[((i * p->shot[0].size_line) + (j * 4))];
-			if (!(c[3] == 0xFF))
-				ft_put_pixel(p, ((WIN_Y - p->shot[0].hei + i) *
-	p->image.size_line) + ((WIN_X / 2 + p->shot[0].wid + j) * 4), ((c[2] << 16)
-	| (c[1] << 8) | c[0]));
-			j++;
-		}
+		ft_put_pixel(p, (i * p->image.size_line) + ((WIN_X / 2 - j) * 4)
+		, 0xFF0000);
+		ft_put_pixel(p, (i * p->image.size_line) + ((WIN_X / 2 + j) * 4)
+		, 0xFF0000);
+		j++;
 		i++;
 	}
 }
@@ -57,6 +52,7 @@ static void		ft_print_animation(t_wolf3d *p, int img)
 		}
 		i++;
 	}
+	ft_print_viewfinder(p);
 }
 
 void			ft_shot(t_wolf3d *p)
@@ -65,7 +61,7 @@ void			ft_shot(t_wolf3d *p)
 	static int j;
 
 	if (p->event.shot == 0)
-		ft_print_weapon(p);
+		ft_print_animation(p, 0);
 	else
 	{
 		ft_print_animation(p, j);

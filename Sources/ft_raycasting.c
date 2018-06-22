@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 03:46:58 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 09:31:56 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 11:58:46 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void		ft_step_three(t_thread *p)
 		}
 		if (p->p->map.map[p->mapx][p->mapy] > 0)
 			p->hit = 1;
+		if (p->x == WIN_X / 2)
+			ft_get_ennemie(p);
 	}
 	if (p->side == 0)
 		p->perpwalldist = (p->mapx - p->p->cam.y + (1.0 - p->stepx)
@@ -75,6 +77,7 @@ void		ft_step_three(t_thread *p)
 	else
 		p->perpwalldist = (p->mapy - p->p->cam.x + (1.0 - p->stepy)
 		/ 2.0) / p->raydir_y;
+	p->sprite->sp[p->x] = p->perpwalldist;
 }
 
 void		*ft_play(void *value)
@@ -102,5 +105,6 @@ void		*ft_play(void *value)
 			ft_draw_wall(drawstart, drawend, p);
 		p->x++;
 	}
+	ft_calc_trace_sprites(p);
 	pthread_exit(NULL);
 }

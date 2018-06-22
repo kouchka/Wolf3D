@@ -6,11 +6,34 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 15:24:56 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 11:13:31 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 12:03:33 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void		ft_threat_shot(t_wolf3d *p)
+{
+	if (p->ennemi == 0)
+	{
+		if ((p->x == 0 || p->x == p->map.y - 1 || p->y == 0
+			|| p->y == p->map.x - 1) && p->event.bullet > 0)
+			p->map.map[p->x][p->y] = 9;
+		else if (p->event.bullet > 0)
+			p->map.map[p->x][p->y] = 0;
+	}
+	else if (p->event.bullet > 0)
+		p->sprite.pos[p->x].hp = 0;
+	if (p->event.bullet > 0)
+	{
+		Mix_PlayChannel(0, p->event.sound[1], 0);
+		p->event.bullet -= 1;
+	}
+	else
+		Mix_PlayChannel(0, p->event.sound[0], 0);
+	p->event.shot = 1;
+	p->event.order = 1;
+}
 
 int			my_button_events(int key, t_wolf3d *p)
 {
@@ -63,22 +86,7 @@ int			my_keys_event_walk(int key, t_wolf3d *p)
 int			ft_my_keys_event(int key, t_wolf3d *p)
 {
 	if (key == KEY_SPACE && p->event.shot == 0 && p->event.pause == 0)
-	{
-		if ((p->x == 0 || p->x == p->map.y - 1 || p->y == 0
-		|| p->y == p->map.x - 1) && p->event.bullet > 0)
-			p->map.map[p->x][p->y] = 9;
-		else if (p->event.bullet > 0)
-			p->map.map[p->x][p->y] = 0;
-		if (p->event.bullet > 0)
-		{
-			Mix_PlayChannel(0, p->event.sound[1], 0);
-			p->event.bullet -= 1;
-		}
-		else
-			Mix_PlayChannel(0, p->event.sound[0], 0);
-		p->event.shot = 1;
-		p->event.order = 1;
-	}
+		ft_threat_shot(p);
 	if (key == KEY_M && p->event.map == 0)
 		p->event.map = 1;
 	else if (key == KEY_M && p->event.map == 1)

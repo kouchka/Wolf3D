@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 17:27:20 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 10:28:46 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 08:14:27 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ void		ft_minimap(int key, t_wolf3d *p)
 	(key == KEY_N) ? p->event.transp += 0.05 : 0;
 	if (key == KEY_B)
 		p->event.transp -= 0.05;
-	if (key == KEY_V && p->event.wow == 0)
-		p->event.wow = 1;
-	else if (key == KEY_V && p->event.wow == 1)
-		p->event.wow = 0;
 	if (key == KEY_C)
 		p->event.transp = TRANSP;
 }

@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 10:05:24 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 12:06:31 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/20 13:10:57 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int		ft_error(char *str)
 {
-	if (ft_strequ(str, W_VALUE))
+	if (ft_strequ(str, W_SPRITE))
+		ft_printf("%s[%i-%i]\n", str, MIN_SPR, MAX_SPR);
+	else if (ft_strequ(str, W_VALUE))
 		ft_printf("%s[%i-%i]\n", str, MIN_MAP, MAX_MAP);
 	else
 		ft_printf("%s", str);

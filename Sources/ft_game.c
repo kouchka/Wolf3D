@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 15:54:50 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 10:18:09 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 13:38:13 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		ft_put_pixel_thread(t_thread *p, int x, int color)
 {
-	if (x < 0 || x >= (WIN_X * WIN_Y) * 4)
+	if (x < 0 || x >= (WIN_X * WIN_Y) * 4 || p->p->image.data[x])
 		return ;
 	p->p->image.data[x] = color & 0xFF;
 	p->p->image.data[x + 1] = color >> 8 & 0xFF;
@@ -32,6 +32,8 @@ void		ft_play_thread(t_wolf3d *p)
 		p->thread[i].x = i * (WIN_X / NB_THREAD);
 		p->thread[i].x_max = (i + 1) * (WIN_X / NB_THREAD);
 		p->thread[i].p = p;
+		p->thread[i].nbr = i;
+		p->thread[i].sprite = &p->sprite;
 		if (pthread_create(&tab[i], NULL, ft_play, &p->thread[i]))
 			ft_error(ERROR_CT);
 		i++;
@@ -76,6 +78,7 @@ int			ft_game(t_wolf3d *p)
 {
 	static int swap;
 
+	p->ennemi = 0;
 	if (p->event.pause == 0)
 	{
 		ft_calc(p);
@@ -93,10 +96,10 @@ int			ft_game(t_wolf3d *p)
 	}
 	else if (p->event.pause == 1)
 		ft_put_pause_menu(p);
-	if (p->event.wow == 1)
-		p->event.transp -= TRANSP;
-	swap++;
-	if (swap == SWAP)
+	if (swap++ == SWAP)
 		ft_swap_texture(p, &swap);
+	else if (!(swap % 9))
+		ft_swap_sprites(p);
+	p->sprite.move++;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 17:22:08 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 10:07:35 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 12:11:34 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,30 @@
 # define SHOT_HIT "Musique/fusil_sound_hit.wav"
 # define SHOT_RECH "Musique/recharge_fusil.wav"
 
-# define INTRO "pics/Intro/wolf_me.xpm"
-# define SKYBOX		"pics/skybox/skybox_hardcore.xpm"
-# define W1_T		"pics/wall.xpm"
-# define W2_T		"pics/wall2.xpm"
-# define W3_T		"pics/wall3.xpm"
-# define W4_T		"pics/wood_wall.xpm"
-# define W5_T	 	"pics/wood.xpm"
-# define W6_T		"pics/eagle.xpm"
-# define W7_T  	"pics/metal.xpm"
-# define W8_T  	"pics/mon_cat.xpm"
-# define W9_T		"pics/untitled.xpm"
+# define INTRO "Pics/Intro/wolf_me.xpm"
 
-# define SHOT_ONE "pics/shot/shot0.xpm"
-# define SHOT_TWO "pics/shot/shot1.xpm"
-# define SHOT_THR "pics/shot/shot2.xpm"
-# define SHOT_FOR "pics/shot/shot3.xpm"
+# define SKYBOX		"Pics/Skybox/skybox_tunnel.xpm"
+
+# define SPRITE_1 "Pics/Sprites/champ.xpm"
+# define SPRITE_2 "Pics/Sprites/champ1.xpm"
+# define SPRITE_3 "Pics/Sprites/champ2.xpm"
+# define SPRITE_4	"Pics/Sprites/Dead_champ.xpm"
+# define SPRITE_5	"Pics/Sprites/Dead_champ1.xpm"
+# define SPRITE_6	"Pics/Sprites/Dead_champ2.xpm"
+
+# define W1_T		"Pics/wall.xpm"
+# define W2_T		"Pics/wall2.xpm"
+# define W3_T		"Pics/wall3.xpm"
+# define W4_T		"Pics/wood_wall.xpm"
+# define W5_T	 	"Pics/wood.xpm"
+# define W6_T		"Pics/eagle.xpm"
+# define W7_T  	"Pics/metal.xpm"
+# define W8_T  	"Pics/mon_cat.xpm"
+# define W9_T		"Pics/untitled.xpm"
+
+# define SHOT_ONE "Pics/Shot/shot0.xpm"
+# define SHOT_TWO "Pics/Shot/shot1.xpm"
+# define SHOT_THR "Pics/Shot/shot2.xpm"
+# define SHOT_FOR "Pics/Shot/shot3.xpm"
 
 #endif

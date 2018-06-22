@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/02 18:19:59 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 10:23:25 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/19 06:50:54 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,7 @@ void		ft_print_me(t_wolf3d *p)
 
 int			ft_calculate_color(unsigned char *c)
 {
-	int			color;
-
-	color = c[2] & 0xFF;
-	color = color << 8;
-	color += c[1] & 0xFF;
-	color = color << 8;
-	color += c[0] & 0xFF;
-	return (color);
+	return (((c[2] << 16) | (c[1] << 8) | c[0]));
 }
 
 void		ft_calculate_map(t_wolf3d *p, int i, int j, unsigned char *c)

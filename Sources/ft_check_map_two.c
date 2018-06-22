@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 18:20:16 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/06 18:39:00 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 10:16:21 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,22 @@
 
 void			ft_get_value(char **map, int i, int *j, int *k)
 {
-	while (ft_isdigit(map[i][*k]))
+	while (map[i][*k] && map[i][*k] != ' ')
 		*k = *k + 1;
 	*j = *j + 1;
+}
+
+void			ft_get_sprite(t_wolf3d *p, int i, int j, int type)
+{
+	static int s;
+
+	if (s >= p->sprite.nbr)
+		return ;
+	p->sprite.pos[s].x = j + 0.5;
+	p->sprite.pos[s].y = i + 0.5;
+	p->sprite.pos[s].type = type;
+	p->sprite.pos[s].hp = 1;
+	s++;
 }
 
 void			ft_assign_tab_value(t_wolf3d *p, char **map)
@@ -37,6 +50,9 @@ void			ft_assign_tab_value(t_wolf3d *p, char **map)
 			if (map[i][k] && ft_isdigit(map[i][k]))
 			{
 				p->map.map[i][j] = ft_atoi(map[i] + k);
+				if (p->map.map[i][j] == 0 && map[i][k + 1] == '-'
+				&& ft_isdigit(map[i][k + 2]))
+					ft_get_sprite(p, i, j, ft_atoi(map[i] + k + 2));
 				ft_get_value(map, i, &j, &k);
 			}
 			else
@@ -48,19 +64,29 @@ void			ft_assign_tab_value(t_wolf3d *p, char **map)
 	free(map);
 }
 
-static void		ft_check_digit(char **map, int *j, int *count, int i)
+static int		ft_check_digit(char **map, int *j, int *count, int i)
 {
+	int k;
+
+	k = 0;
 	while (map[i][*j])
 	{
 		if (ft_isdigit(map[i][*j]))
 		{
 			while (ft_isdigit(map[i][*j]))
 				*j = *j + 1;
+			if (map[i][*j] == '-')
+			{
+				if (map[i][*j - 1] == '0')
+					k++;
+				*j = *j + 2;
+			}
 			*count = *count + 1;
 		}
 		if (map[i][*j])
 			*j = *j + 1;
 	}
+	return (k);
 }
 
 int				ft_size_x(char **map, t_wolf3d *p)
@@ -76,7 +102,7 @@ int				ft_size_x(char **map, t_wolf3d *p)
 	{
 		j = 0;
 		count = 0;
-		ft_check_digit(map, &j, &count, i);
+		p->sprite.nbr += ft_check_digit(map, &j, &count, i);
 		if (count > value)
 			value = count;
 		i++;

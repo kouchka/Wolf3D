@@ -6,11 +6,45 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 17:40:00 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 02:23:04 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 12:12:19 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+static void	ft_get_sprite(t_wolf3d *p)
+{
+	p->sprite.image[0].add = mlx_xpm_file_to_image(p->mlx, SPRITE_1,
+		&p->sprite.image[0].wid, &p->sprite.image[0].hei);
+	p->sprite.image[0].data = (unsigned char *)mlx_get_data_addr(
+	p->sprite.image[0].add, &p->sprite.image[0].bpp,
+	&p->sprite.image[0].size_line, &p->sprite.image[0].endian);
+	p->sprite.image[1].add = mlx_xpm_file_to_image(p->mlx, SPRITE_2,
+	&p->sprite.image[1].wid, &p->sprite.image[1].hei);
+	p->sprite.image[1].data = (unsigned char *)
+		mlx_get_data_addr(p->sprite.image[1].add, &p->sprite.image[1].bpp,
+	&p->sprite.image[1].size_line, &p->sprite.image[1].endian);
+	p->sprite.image[2].add = mlx_xpm_file_to_image(p->mlx, SPRITE_3,
+		&p->sprite.image[2].wid, &p->sprite.image[2].hei);
+	p->sprite.image[2].data = (unsigned char *)mlx_get_data_addr(
+	p->sprite.image[2].add, &p->sprite.image[2].bpp,
+	&p->sprite.image[2].size_line, &p->sprite.image[2].endian);
+	p->sprite.image[3].add = mlx_xpm_file_to_image(p->mlx, SPRITE_4,
+		&p->sprite.image[3].wid, &p->sprite.image[3].hei);
+	p->sprite.image[3].data = (unsigned char *)mlx_get_data_addr(
+	p->sprite.image[3].add, &p->sprite.image[3].bpp,
+	&p->sprite.image[3].size_line, &p->sprite.image[3].endian);
+	p->sprite.image[4].add = mlx_xpm_file_to_image(p->mlx, SPRITE_5,
+	&p->sprite.image[4].wid, &p->sprite.image[4].hei);
+	p->sprite.image[4].data = (unsigned char *)
+		mlx_get_data_addr(p->sprite.image[4].add, &p->sprite.image[4].bpp,
+	&p->sprite.image[4].size_line, &p->sprite.image[4].endian);
+	p->sprite.image[5].add = mlx_xpm_file_to_image(p->mlx, SPRITE_6,
+		&p->sprite.image[5].wid, &p->sprite.image[5].hei);
+	p->sprite.image[5].data = (unsigned char *)mlx_get_data_addr(
+	p->sprite.image[5].add, &p->sprite.image[5].bpp,
+	&p->sprite.image[5].size_line, &p->sprite.image[5].endian);
+}
 
 static void	ft_get_shot(t_wolf3d *p)
 {
@@ -33,6 +67,7 @@ static void	ft_get_shot(t_wolf3d *p)
 		&p->shot[3].hei);
 	p->shot[3].data = (unsigned char *)mlx_get_data_addr(p->shot[3].add,
 		&p->shot[3].bpp, &p->shot[3].size_line, &p->shot[3].endian);
+	ft_get_sprite(p);
 }
 
 static void	ft_get_texture_two(t_wolf3d *p)

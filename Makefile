@@ -6,7 +6,7 @@
 #    By: allallem <allallem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 16:48:55 by allallem          #+#    #+#              #
-#    Updated: 2018/06/18 07:50:57 by allallem         ###   ########.fr        #
+#    Updated: 2018/06/21 10:00:24 by allallem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,9 @@ SRC		= main.c\
 				ft_draw_wall.c\
 				ft_raycasting.c\
 				ft_recalc.c\
-				ft_shot.c
+				ft_shot.c\
+				ft_trace_sprites.c\
+				ft_ia.c
 
 SRCS = $(addprefix $(SRCDIR), $(SRC))
 

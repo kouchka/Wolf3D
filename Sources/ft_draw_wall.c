@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 03:33:41 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 09:56:26 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 13:16:18 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		ft_initialisation(t_thread *p)
 	if ((p->side == 0 && p->raydir_x > 0) || (p->side == 1 && p->raydir_y < 0))
 		p->texx = p->p->tex_i[p->texture].wid - p->texx;
 	p->xew = p->p->tex_i[p->texture].wid - (int)p->texx - 1;
-	if (p->x == WIN_X / 2)
+	if (p->x == WIN_X / 2 && p->p->ennemi == 0)
 	{
 		p->p->x = p->mapx;
 		p->p->y = p->mapy;

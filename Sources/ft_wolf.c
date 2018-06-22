@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 15:15:27 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/18 08:26:31 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 08:16:00 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,18 @@ void				ft_init(t_wolf3d *p)
 	p->win = mlx_new_window(p->mlx, WIN_X, WIN_Y, "Wolf_3D");
 }
 
-void				ft_get_color(t_wolf3d *p)
+void				ft_init_plus_music(t_wolf3d *p)
 {
+	pthread_t	ia;
+	t_thread	*sia;
+
+	if (!(sia = ft_memalloc(sizeof(t_thread))))
+		ft_error(F_MAL);
+	sia->sprite = &p->sprite;
+	sia->p = p;
+	if (pthread_create(&ia, NULL, ft_ia, sia))
+		ft_error(ERROR_CT);
+	p->event.exit = 0;
 	Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT,
 	MIX_DEFAULT_CHANNELS, 1024);
 	p->event.music = Mix_LoadMUS(MUSIC);
@@ -38,6 +48,7 @@ void				ft_get_color(t_wolf3d *p)
 	Mix_PlayMusic(p->event.music, -1);
 	p->event.bullet = 6;
 	p->event.bullet_bag = 30;
+	p->sprite.way = 0;
 	p->event.sound[0] = Mix_LoadWAV(SHOT_S);
 	p->event.sound[1] = Mix_LoadWAV(SHOT_HIT);
 	p->event.sound[2] = Mix_LoadWAV(SHOT_RECH);
@@ -64,7 +75,7 @@ void				ft_wolf(t_wolf3d *p)
 	p->event.lol = 1;
 	p->map.minimapx = MINIMAPX;
 	p->map.minimapy = MINIMAPY;
-	ft_get_color(p);
+	ft_init_plus_music(p);
 	ft_get_texture(p);
 	mlx_hook(p->win, 17, 0L, my_button_events, p);
 	mlx_hook(p->win, 6, (1L << 6), my_mouse_events, p);

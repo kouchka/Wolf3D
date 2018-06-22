@@ -6,18 +6,21 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 10:42:25 by allallem          #+#    #+#             */
-/*   Updated: 2018/06/06 18:28:17 by allallem         ###   ########.fr       */
+/*   Updated: 2018/06/22 10:32:33 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static int		ft_get_it(char **map, t_wolf3d *p)
+static int		ft_get_it(char *tab, t_wolf3d *p)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	**map;
 
 	j = 0;
+	map = ft_strsplit(tab, '\n');
+	free(tab);
 	i = ft_tablen(map);
 	if (!(p->map.map = malloc(sizeof(int *) * i)))
 		return (ft_error(F_MAL));
@@ -29,6 +32,8 @@ static int		ft_get_it(char **map, t_wolf3d *p)
 			return (ft_error(F_MAL));
 		i++;
 	}
+	if (p->sprite.nbr)
+		p->sprite.pos = ft_memalloc(sizeof(t_type) * p->sprite.nbr);
 	ft_assign_tab_value(p, map);
 	return (1);
 }
@@ -37,7 +42,6 @@ static int		ft_treat_map(t_wolf3d *p, char *map)
 {
 	int		i;
 	int		j;
-	char	**tab;
 
 	i = 0;
 	if (map == NULL)
@@ -46,13 +50,20 @@ static int		ft_treat_map(t_wolf3d *p, char *map)
 	{
 		while (map[i] == ' ')
 			i++;
-		if (map[i] != '\n' && ((j = ft_atoi(map + i)) > MAX_MAP || j < MIN_MAP))
+		if (map[i] == '-')
+		{
+			if (ft_isdigit(map[i + 1]) &&
+			(((j = ft_atoi(map + i + 1)) <= MAX_SPR) && j > MIN_SPR))
+				i += 2;
+			else
+				return (ft_error(W_SPRITE));
+		}
+		else if (map[i] != '\n' && ((j = ft_atoi(map + i)) > MAX_MAP
+		|| j < MIN_MAP))
 			return (ft_error(W_VALUE));
 		i++;
 	}
-	tab = ft_strsplit(map, '\n');
-	free(map);
-	return (ft_get_it(tab, p));
+	return (ft_get_it(map, p));
 }
 
 static int		ft_check_numbers(char *str)
@@ -64,8 +75,13 @@ static int		ft_check_numbers(char *str)
 	{
 		while (str[i] == ' ')
 			i++;
-		if ((str[i] < '0' || str[i] > '9') && str[i] != '\0' && str[i] != '\n')
+		if ((str[i] < '0' || str[i] > '9') && str[i] != '\0' && str[i] != '\n'
+		&& str[i] != '-')
 			return (ft_error(W_MAP));
+		else if ((str[i] == '-' && i > 0 && (!ft_isdigit(str[i - 1])
+		|| !ft_isdigit(str[i + 1])))
+		|| (str[i] == '-' && i == 0))
+			return (0);
 		if (str[i] != '\0')
 			i++;
 	}
